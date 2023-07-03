@@ -8,13 +8,30 @@
 import SwiftUI
 
 struct HabitRowView: View {
+    let habit: Habit
+    let completed: Bool
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
-}
-
-struct HabitRowView_Previews: PreviewProvider {
-    static var previews: some View {
-        HabitRowView()
+        HStack {
+            Image(systemName: habit.image)
+                .foregroundColor(habit.color)
+                .padding(.leading)
+            
+            Text(habit.title)
+                .font(.title3.bold())
+                .foregroundColor(.primary)
+                .padding(.leading, 8)
+                .padding(.vertical, 16)
+            
+            Spacer()
+            
+            Text(habit.streak == 0 ? "" : "🔥 \(habit.streak) Days")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+                .padding(.trailing)
+        }
+        .background(completed ? habit.color.opacity(0.25) : Color("Default Background"))
+        .clipShape(RoundedRectangle(cornerRadius: 15))
+        .padding(.horizontal)
     }
 }
